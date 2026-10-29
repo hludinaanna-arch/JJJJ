@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrackMyUni - Правила приема</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary-color: #5a5ce6; --primary-hover: #4a4cd6; --text-dark: #111; --text-gray: #6b7280; --bg-light: #f9fafb; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Outfit', sans-serif; background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        
+        /* Header */
+        header { background-color: #fff; padding: 1.5rem 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.8rem; font-size: 1.5rem; font-weight: 700; color: var(--text-dark); }
+        .logo svg { height: 40px; width: auto; }
+        .logo .highlight-my { color: #5A5CE6; }
+        nav { display: flex; gap: 2rem; align-items: center; }
+        nav a { font-weight: 500; color: var(--text-dark); transition: color 0.3s ease; }
+        nav a:hover { color: var(--primary-color); }
+        #lang-toggle { background: none; border: none; cursor: pointer; font-size: 1.4rem; color: var(--text-dark); display: flex; align-items: center; transition: transform 0.3s; padding: 0.5rem; border-radius: 50%; }
+        #lang-toggle:hover { background-color: #f3f4f6; transform: rotate(15deg); }
+        .auth-buttons { display: flex; gap: 1rem; }
+        .btn { padding: 0.6rem 1.5rem; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; display: inline-block; }
+        .btn-login { background-color: transparent; border-color: var(--primary-color); color: var(--primary-color); }
+        .btn-login:hover { background-color: var(--primary-color); color: #fff; }
+        .btn-signup { background-color: var(--primary-color); color: #fff; }
+        .btn-signup:hover { background-color: var(--primary-hover); }
+
+        /* Faculty Page Styles */
+        .page-header { 
+            background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%); 
+            padding: 4rem 0; 
+            border-bottom-left-radius: 3rem; 
+            border-bottom-right-radius: 3rem; 
+            margin-bottom: 3rem; 
+        }
+        .faculty-title h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.02em; }
+        .faculty-meta { display: flex; gap: 2rem; margin-top: 1rem; color: var(--text-gray); font-size: 1.1rem; }
+        
+        .programs-section { margin-bottom: 4rem; }
+        .program-card { 
+            background: #fff; 
+            padding: 2.5rem; 
+            border-radius: 1.5rem; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
+            margin-bottom: 2rem; 
+            border-left: 5px solid var(--primary-color);
+        }
+        .program-code { font-size: 0.9rem; color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+        .program-name { font-size: 1.6rem; font-weight: 700; margin-bottom: 1.5rem; }
+        
+        .exam-list { list-style: none; margin-bottom: 2rem; }
+        .exam-item { 
+            display: flex; 
+            align-items: baseline; 
+            gap: 1rem; 
+            padding: 0.8rem 0; 
+            border-bottom: 1px solid #f3f4f6; 
+            font-size: 1.05rem;
+        }
+        .exam-item:last-child { border-bottom: none; }
+        .exam-priority { 
+            min-width: 30px; 
+            height: 30px; 
+            background: var(--primary-color); 
+            color: #fff; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: 700; 
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .exam-details { flex-grow: 1; }
+        .exam-type { font-weight: 600; color: var(--text-dark); }
+        .exam-format { color: var(--text-gray); font-size: 0.95rem; margin-left: 0.5rem; }
+        
+        .quota-badge { 
+            display: inline-block; 
+            background: #eef2ff; 
+            color: var(--primary-color); 
+            padding: 0.3rem 0.8rem; 
+            border-radius: 20px; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            margin-right: 0.5rem; 
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; margin-top: 3rem; }
+        .nav-link { 
+            background: #fff; 
+            padding: 1.2rem; 
+            border-radius: 1rem; 
+            text-align: center; 
+            font-weight: 600; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03); 
+            transition: all 0.3s;
+        }
+        .nav-link:hover { background: var(--primary-color); color: #fff; transform: translateY(-3px); }
+
+        @media (max-width: 768px) { 
+            .header-content { flex-direction: column; gap: 1.5rem; } 
+            nav { flex-wrap: wrap; justify-content: center; } 
+            .faculty-title h1 { font-size: 2.2rem; } 
+            .faculty-meta { flex-direction: column; gap: 0.5rem; }
+            .exam-item { flex-direction: column; gap: 0.3rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M50 20L15 40L50 60L85 40L50 20Z" stroke="#1F2937" stroke-width="5" stroke-linejoin="round"/><path d="M25 50V75C25 75 35 85 50 85C65 85 75 75 75 75V50" stroke="#1F2937" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="85" cy="65" r="8" fill="#5A5CE6"/><path d="M75 55L85 65" stroke="#5A5CE6" stroke-width="3" stroke-linecap="round"/></svg>
+                <span>Track<span class="highlight-my">My</span>Uni</span>
+            </div>
+            <nav>
+                <a href="index.html" data-key="nav_home">Home</a>
+                <a href="universities.html" data-key="nav_uni">Universities</a>
+                <button id="lang-toggle" title="Switch Language"><i class="fa-solid fa-globe"></i></button>
+            </nav>
+            <div class="auth-buttons">
+                <a href="#" class="btn btn-login" data-key="btn_login">Log In</a>
+                <a href="#" class="btn btn-signup" data-key="btn_signup">Sign Up</a>
+            </div>
+        </div>
+    </header>
+    
+    <main id="faculty-content">
+        <!-- Content will be injected here by JS -->
+    </main>
+
+    <script>
+        // --- DATA FROM kcp_bak.pdf (STRICTLY ACCORDING TO DOCUMENT) ---
+        const facultiesData = [
+            {
+                id: "math-mech",
+                en: { name: "Faculty of Mechanics and Mathematics" },
+                ru: { name: "Механико-математический факультет" },
+                programs: [
+                    {
+                        code: "01.05.01",
+                        en: { name: "Fundamental Mathematics and Mechanics (Mathematics)", exams: ["Mathematics (DVI, written)", "Mathematics (EGE)", "Physics (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Фундаментальные математика и механика (Математика)", exams: ["Математика (ДВИ, письменно)", "Математика (ЕГЭ)", "Физика (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 25 мест", "Отдельная квота: 25 мест", "Целевая квота: 2 места"]
+                    },
+                    {
+                        code: "01.05.01",
+                        en: { name: "Fundamental Mathematics and Mechanics (Mechanics)", exams: ["Mathematics (DVI, written)", "Mathematics (EGE)", "Physics (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Фундаментальные математика и механика (Механика)", exams: ["Математика (ДВИ, письменно)", "Математика (ЕГЭ)", "Физика (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 10 мест", "Отдельная квота: 10 мест"]
+                    },
+                    {
+                        code: "01.05.01",
+                        en: { name: "Fundamental Mathematics and Mathematical Physics", exams: ["Mathematics (DVI, written)", "Mathematics (EGE)", "Physics (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Фундаментальная математика и математическая физика", exams: ["Математика (ДВИ, письменно)", "Математика (ЕГЭ)", "Физика (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 4 места", "Отдельная квота: 4 места"]
+                    }
+                ]
+            },
+            {
+                id: "vmk",
+                en: { name: "Faculty of Computational Mathematics and Cybernetics" },
+                ru: { name: "Факультет вычислительной математики и кибернетики" },
+                programs: [
+                    {
+                        code: "01.03.02",
+                        en: { name: "Applied Mathematics and Informatics", exams: ["Mathematics (DVI, written)", "Mathematics (EGE)", "Physics (EGE)", "Informatics (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Прикладная математика и информатика", exams: ["Математика (ДВИ, письменно)", "Математика (ЕГЭ)", "Физика (ЕГЭ)", "Информатика (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 32 места", "Отдельная квота: 32 места", "Целевые квоты: 9 мест"]
+                    },
+                    {
+                        code: "02.03.02",
+                        en: { name: "Fundamental Informatics and Information Technologies", exams: ["Mathematics (DVI, written)", "Mathematics (EGE)", "Physics (EGE)", "Informatics (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Фундаментальная информатика и информационные технологии", exams: ["Математика (ДВИ, письменно)", "Математика (ЕГЭ)", "Физика (ЕГЭ)", "Информатика (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 2 места", "Отдельная квота: 2 места", "Целевые квоты: 2 места"]
+                    }
+                ]
+            },
+            {
+                id: "physics",
+                en: { name: "Faculty of Physics" },
+                ru: { name: "Физический факультет" },
+                programs: [
+                    {
+                        code: "03.05.02",
+                        en: { name: "Fundamental and Applied Physics", exams: ["Physics (DVI, written)", "Physics (EGE)", "Mathematics OR Informatics (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Фундаментальная и прикладная физика", exams: ["Физика (ДВИ, письменно)", "Физика (ЕГЭ)", "Математика ИЛИ Информатика (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 35 мест", "Отдельная квота: 35 мест"]
+                    },
+                    {
+                        code: "03.05.01",
+                        en: { name: "Astronomy", exams: ["Physics (DVI, written)", "Physics (EGE)", "Mathematics (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Астрономия", exams: ["Физика (ДВИ, письменно)", "Физика (ЕГЭ)", "Математика (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 2 места", "Отдельная квота: 2 места"]
+                    }
+                ]
+            },
+            {
+                id: "chemistry",
+                en: { name: "Faculty of Chemistry" },
+                ru: { name: "Химический факультет" },
+                programs: [
+                    {
+                        code: "04.05.01",
+                        en: { name: "Fundamental and Applied Chemistry", exams: ["Chemistry (DVI, written)", "Chemistry (EGE)", "Mathematics (EGE)", "Physics OR Biology (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Фундаментальная и прикладная химия", exams: ["Химия (ДВИ, письменно)", "Химия (ЕГЭ)", "Математика (ЕГЭ)", "Физика ИЛИ Биология (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 22 места", "Отдельная квота: 22 места", "Целевые квоты: 6 мест"]
+                    }
+                ]
+            },
+            {
+                id: "biology",
+                en: { name: "Faculty of Biology" },
+                ru: { name: "Биологический факультет" },
+                programs: [
+                    {
+                        code: "06.05.02",
+                        en: { name: "Fundamental and Applied Biology (Physicochemical Biology)", exams: ["Biology (DVI, written)", "Biology (EGE)", "Mathematics (EGE)", "Chemistry (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Фундаментальная и прикладная биология (Физико-химическая биология)", exams: ["Биология (ДВИ, письменно)", "Биология (ЕГЭ)", "Математика (ЕГЭ)", "Химия (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 16 мест", "Отдельная квота: 16 мест", "Целевая квота: 2 места"]
+                    },
+                    {
+                        code: "06.05.02",
+                        en: { name: "Fundamental and Applied Biology (Bioengineering, Biophysics)", exams: ["Mathematics (DVI, written)", "Biology (EGE)", "Mathematics (EGE)", "Chemistry (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Фундаментальная и прикладная биология (Биоинженерия, Биофизика)", exams: ["Математика (ДВИ, письменно)", "Биология (ЕГЭ)", "Математика (ЕГЭ)", "Химия (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 2 места", "Отдельная квота: 2 места"]
+                    },
+                    {
+                        code: "05.03.06",
+                        en: { name: "Ecology and Nature Management", exams: ["Biology (DVI, written)", "Biology (EGE)", "Mathematics (EGE)", "Chemistry (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Экология и природопользование", exams: ["Биология (ДВИ, письменно)", "Биология (ЕГЭ)", "Математика (ЕГЭ)", "Химия (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 2 места", "Отдельная квота: 2 места", "Целевая квота: 1 место"]
+                    }
+                ]
+            },
+            {
+                id: "soil",
+                en: { name: "Faculty of Soil Science" },
+                ru: { name: "Факультет почвоведения" },
+                programs: [
+                    {
+                        code: "06.03.02",
+                        en: { name: "Soil Science", exams: ["Biology (DVI, written)", "Biology (EGE)", "Mathematics OR Chemistry OR Geography OR Physics OR Informatics (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Почвоведение", exams: ["Биология (ДВИ, письменно)", "Биология (ЕГЭ)", "Математика ИЛИ Химия ИЛИ География ИЛИ Физика ИЛИ Информатика (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 6 мест", "Отдельная квота: 6 мест", "Целевые квоты: 8 мест"]
+                    },
+                    {
+                        code: "05.03.06",
+                        en: { name: "Ecology and Nature Management", exams: ["Geography (DVI, written)", "Geography (EGE)", "Mathematics OR Chemistry OR Biology OR Informatics OR Physics (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Экология и природопользование", exams: ["География (ДВИ, письменно)", "География (ЕГЭ)", "Математика ИЛИ Химия ИЛИ Биология ИЛИ Информатика ИЛИ Физика (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 2 места", "Отдельная квота: 2 места", "Целевая квота: 1 место"]
+                    }
+                ]
+            },
+            {
+                id: "geology",
+                en: { name: "Faculty of Geology" },
+                ru: { name: "Геологический факультет" },
+                programs: [
+                    {
+                        code: "05.03.01",
+                        en: { name: "Geology", exams: ["Mathematics (DVI, written)", "Mathematics (EGE)", "Physics OR Geography OR Chemistry OR Informatics (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Геология", exams: ["Математика (ДВИ, письменно)", "Математика (ЕГЭ)", "Физика ИЛИ География ИЛИ Химия ИЛИ Информатика (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 20 мест", "Отдельная квота: 20 мест", "Целевая квота: 1 место"]
+                    }
+                ]
+            },
+            {
+                id: "geography",
+                en: { name: "Faculty of Geography" },
+                ru: { name: "Географический факультет" },
+                programs: [
+                    {
+                        code: "05.03.00",
+                        en: { name: "Earth Sciences (Geography, Cartography, Hydrometeorology, Ecology)", exams: ["Geography (DVI, written)", "Geography (EGE)", "Mathematics OR Informatics OR Biology OR Physics (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Науки о Земле (География, Картография, Гидрометеорология, Экология)", exams: ["География (ДВИ, письменно)", "География (ЕГЭ)", "Математика ИЛИ Информатика ИЛИ Биология ИЛИ Физика (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 15 мест", "Отдельная квота: 15 мест"]
+                    },
+                    {
+                        code: "43.03.02",
+                        en: { name: "Tourism", exams: ["Social Studies (DVI, written)", "Social Studies (EGE)", "History OR Geography OR Foreign Language (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Туризм", exams: ["Обществознание (ДВИ, письменно)", "Обществознание (ЕГЭ)", "История ИЛИ География ИЛИ Иностранный язык (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 1 место", "Отдельная квота: 1 место"]
+                    }
+                ]
+            },
+            {
+                id: "materials",
+                en: { name: "Faculty of Materials Science" },
+                ru: { name: "Факультет наук о материалах" },
+                programs: [
+                    {
+                        code: "04.03.02",
+                        en: { name: "Chemistry, Physics and Mechanics of Materials", exams: ["Mathematics (DVI, written)", "Mathematics (EGE)", "Chemistry (EGE)", "Physics OR Informatics (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Химия, физика и механика материалов", exams: ["Математика (ДВИ, письменно)", "Математика (ЕГЭ)", "Химия (ЕГЭ)", "Физика ИЛИ Информатика (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 3 места", "Отдельная квота: 3 места"]
+                    }
+                ]
+            },
+            {
+                id: "medicine",
+                en: { name: "Faculty of Fundamental Medicine" },
+                ru: { name: "Факультет фундаментальной медицины" },
+                programs: [
+                    {
+                        code: "31.05.01",
+                        en: { name: "General Medicine", exams: ["Chemistry (DVI, written)", "Chemistry (EGE)", "Biology (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Лечебное дело", exams: ["Химия (ДВИ, письменно)", "Химия (ЕГЭ)", "Биология (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 6 мест", "Отдельная квота: 6 мест"]
+                    },
+                    {
+                        code: "33.05.01",
+                        en: { name: "Pharmacy", exams: ["Chemistry (DVI, written)", "Chemistry (EGE)", "Biology (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Фармация", exams: ["Химия (ДВИ, письменно)", "Химия (ЕГЭ)", "Биология (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 2 места", "Отдельная квота: 2 места", "Целевая квота: 1 место"]
+                    }
+                ]
+            },
+            {
+                id: "history",
+                en: { name: "Faculty of History" },
+                ru: { name: "Исторический факультет" },
+                programs: [
+                    {
+                        code: "46.03.01",
+                        en: { name: "History", exams: ["History (DVI, written)", "History (EGE)", "Foreign Language OR Social Studies (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "История", exams: ["История (ДВИ, письменно)", "История (ЕГЭ)", "Иностранный язык ИЛИ Обществознание (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 11 мест", "Отдельная квота: 11 мест"]
+                    },
+                    {
+                        code: "50.03.03",
+                        en: { name: "Art History", exams: ["Creative DVI (written, oral)", "History (EGE)", "Foreign Language OR Literature (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "История искусств", exams: ["Творческое ДВИ (письменно, устно)", "История (ЕГЭ)", "Иностранный язык ИЛИ Литература (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 2 места", "Отдельная квота: 2 места"]
+                    }
+                ]
+            },
+            {
+                id: "philology",
+                en: { name: "Faculty of Philology" },
+                ru: { name: "Филологический факультет" },
+                programs: [
+                    {
+                        code: "45.03.01",
+                        en: { name: "Philology (Russian Language and Literature)", exams: ["Literature (DVI, written)", "Literature (EGE)", "History OR Foreign Language (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Филология (Русский язык и литература)", exams: ["Литература (ДВИ, письменно)", "Литература (ЕГЭ)", "История ИЛИ Иностранный язык (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 8 мест", "Отдельная квота: 8 мест"]
+                    },
+                    {
+                        code: "45.03.01",
+                        en: { name: "Philology (Foreign Philology)", exams: ["Literature (DVI, written)", "Literature (EGE)", "Foreign Language (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Филология (Зарубежная филология)", exams: ["Литература (ДВИ, письменно)", "Литература (ЕГЭ)", "Иностранный язык (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 8 мест", "Отдельная квота: 8 мест"]
+                    },
+                    {
+                        code: "45.03.03",
+                        en: { name: "Fundamental and Applied Linguistics", exams: ["Foreign Language (DVI, written)", "Foreign Language (EGE)", "Mathematics (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Фундаментальная и прикладная лингвистика", exams: ["Иностранный язык (ДВИ, письменно)", "Иностранный язык (ЕГЭ)", "Математика (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 3 места", "Отдельная квота: 3 места"]
+                    }
+                ]
+            },
+            {
+                id: "philosophy",
+                en: { name: "Faculty of Philosophy" },
+                ru: { name: "Философский факультет" },
+                programs: [
+                    {
+                        code: "47.03.01",
+                        en: { name: "Philosophy", exams: ["Social Studies (DVI, written)", "Social Studies (EGE)", "History OR Foreign Language OR Literature (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Философия", exams: ["Обществознание (ДВИ, письменно)", "Обществознание (ЕГЭ)", "История ИЛИ Иностранный язык ИЛИ Литература (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 7 мест", "Отдельная квота: 7 мест"]
+                    },
+                    {
+                        code: "47.03.03",
+                        en: { name: "Religious Studies", exams: ["History (DVI, written)", "History (EGE)", "Social Studies OR Geography OR Literature OR Foreign Language (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Религиоведение", exams: ["История (ДВИ, письменно)", "История (ЕГЭ)", "Обществознание ИЛИ География ИЛИ Литература ИЛИ Иностранный язык (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 2 места", "Отдельная квота: 2 места"]
+                    },
+                    {
+                        code: "42.03.01",
+                        en: { name: "Advertising and Public Relations", exams: ["Social Studies (DVI, written)", "Social Studies (EGE)", "History OR Informatics OR Foreign Language OR Literature (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Реклама и связи с общественностью", exams: ["Обществознание (ДВИ, письменно)", "Обществознание (ЕГЭ)", "История ИЛИ Информатика ИЛИ Иностранный язык ИЛИ Литература (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 2 места", "Отдельная квота: 2 места"]
+                    },
+                    {
+                        code: "51.03.01",
+                        en: { name: "Culturology", exams: ["Social Studies (DVI, written)", "Social Studies (EGE)", "History OR Foreign Language OR Literature (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Культурология", exams: ["Обществознание (ДВИ, письменно)", "Обществознание (ЕГЭ)", "История ИЛИ Иностранный язык ИЛИ Литература (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 2 места", "Отдельная квота: 2 места"]
+                    }
+                ]
+            },
+            {
+                id: "economics",
+                en: { name: "Faculty of Economics" },
+                ru: { name: "Экономический факультет" },
+                programs: [
+                    {
+                        code: "38.03.01",
+                        en: { name: "Economics", exams: ["Mathematics (DVI, written)", "Mathematics (EGE)", "Foreign Language OR Informatics OR Geography OR History OR Social Studies (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Экономика", exams: ["Математика (ДВИ, письменно)", "Математика (ЕГЭ)", "Иностранный язык ИЛИ Информатика ИЛИ География ИЛИ История ИЛИ Обществознание (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 17 мест", "Отдельная квота: 17 мест", "Целевые квоты: 9 мест"]
+                    },
+                    {
+                        code: "38.03.02",
+                        en: { name: "Management", exams: ["Mathematics (DVI, written)", "Mathematics (EGE)", "Foreign Language OR Informatics OR History OR Social Studies (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Менеджмент", exams: ["Математика (ДВИ, письменно)", "Математика (ЕГЭ)", "Иностранный язык ИЛИ Информатика ИЛИ История ИЛИ Обществознание (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 3 места", "Отдельная квота: 3 места", "Целевые квоты: 2 места"]
+                    }
+                ]
+            },
+            {
+                id: "law",
+                en: { name: "Faculty of Law" },
+                ru: { name: "Юридический факультет" },
+                programs: [
+                    {
+                        code: "40.03.01",
+                        en: { name: "Jurisprudence", exams: ["Social Studies (DVI, written)", "Social Studies (EGE)", "History OR Informatics OR Mathematics (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Юриспруденция", exams: ["Обществознание (ДВИ, письменно)", "Обществознание (ЕГЭ)", "История ИЛИ Информатика ИЛИ Математика (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 31 место", "Отдельная квота: 31 место", "Целевые квоты: 10 мест"]
+                    }
+                ]
+            },
+            {
+                id: "journalism",
+                en: { name: "Faculty of Journalism" },
+                ru: { name: "Факультет журналистики" },
+                programs: [
+                    {
+                        code: "42.03.02",
+                        en: { name: "Journalism", exams: ["Creative Written DVI", "Literature (EGE)", "Foreign Language OR History OR Geography (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Журналистика", exams: ["Творческое письменное ДВИ", "Литература (ЕГЭ)", "Иностранный язык ИЛИ История ИЛИ География (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 11 мест", "Отдельная квота: 11 мест", "Целевая квота: 1 место"]
+                    },
+                    {
+                        code: "42.03.05",
+                        en: { name: "Media Communications", exams: ["Creative Written DVI", "Literature (EGE)", "Social Studies OR History OR Geography (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Медиакоммуникации", exams: ["Творческое письменное ДВИ", "Литература (ЕГЭ)", "Обществознание ИЛИ История ИЛИ География (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 7 мест", "Отдельная квота: 7 мест"]
+                    }
+                ]
+            },
+            {
+                id: "psychology",
+                en: { name: "Faculty of Psychology" },
+                ru: { name: "Факультет психологии" },
+                programs: [
+                    {
+                        code: "37.05.01",
+                        en: { name: "Clinical Psychology", exams: ["Biology (DVI, written)", "Biology (EGE)", "Mathematics OR Social Studies OR Chemistry (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Клиническая психология", exams: ["Биология (ДВИ, письменно)", "Биология (ЕГЭ)", "Математика ИЛИ Обществознание ИЛИ Химия (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 6 мест", "Отдельная квота: 6 мест"]
+                    },
+                    {
+                        code: "37.05.02",
+                        en: { name: "Service Psychology", exams: ["Biology (DVI, written)", "Biology (EGE)", "Mathematics OR Social Studies (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Психология служебной деятельности", exams: ["Биология (ДВИ, письменно)", "Биология (ЕГЭ)", "Математика ИЛИ Обществознание (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 5 мест", "Отдельная квота: 5 мест"]
+                    },
+                    {
+                        code: "44.05.01",
+                        en: { name: "Pedagogy and Psychology of Deviant Behavior", exams: ["Social Studies (DVI, written)", "Social Studies (EGE)", "Mathematics OR Biology OR History (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Педагогика и психология девиантного поведения", exams: ["Обществознание (ДВИ, письменно)", "Обществознание (ЕГЭ)", "Математика ИЛИ Биология ИЛИ История (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 2 места", "Отдельная квота: 2 места"]
+                    }
+                ]
+            },
+            {
+                id: "asia-africa",
+                en: { name: "Institute of Asian and African Studies" },
+                ru: { name: "Институт стран Азии и Африки" },
+                programs: [
+                    {
+                        code: "58.03.01",
+                        en: { name: "Oriental Studies and African Studies", exams: ["History (DVI, written)", "History (EGE)", "Foreign Language (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Востоковедение и африканистика", exams: ["История (ДВИ, письменно)", "История (ЕГЭ)", "Иностранный язык (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 10 мест", "Отдельная квота: 10 мест"]
+                    }
+                ]
+            },
+            {
+                id: "sociology",
+                en: { name: "Faculty of Sociology" },
+                ru: { name: "Социологический факультет" },
+                programs: [
+                    {
+                        code: "39.03.01",
+                        en: { name: "Sociology", exams: ["Social Studies (DVI, written)", "Social Studies (EGE)", "Mathematics OR History (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Социология", exams: ["Обществознание (ДВИ, письменно)", "Обществознание (ЕГЭ)", "Математика ИЛИ История (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 10 мест", "Отдельная квота: 10 мест"]
+                    },
+                    {
+                        code: "41.03.06",
+                        en: { name: "Public Policy and Social Sciences", exams: ["Social Studies (DVI, written)", "Social Studies (EGE)", "Foreign Language OR History OR Geography (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Публичная политика и социальные науки", exams: ["Обществознание (ДВИ, письменно)", "Обществознание (ЕГЭ)", "Иностранный язык ИЛИ История ИЛИ География (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 3 места", "Отдельная квота: 3 места", "Целевая квота: 1 место"]
+                    }
+                ]
+            },
+            {
+                id: "foreign-lang",
+                en: { name: "Faculty of Foreign Languages and Area Studies" },
+                ru: { name: "Факультет иностранных языков и регионоведения" },
+                programs: [
+                    {
+                        code: "45.05.01",
+                        en: { name: "Translation and Translation Studies", exams: ["Foreign Language (DVI, written)", "Foreign Language (EGE)", "History OR Social Studies (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Перевод и переводоведение", exams: ["Иностранный язык (ДВИ, письменно)", "Иностранный язык (ЕГЭ)", "История ИЛИ Обществознание (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 2 места", "Отдельная квота: 2 места"]
+                    },
+                    {
+                        code: "45.03.02",
+                        en: { name: "Linguistics", exams: ["Foreign Language (DVI, written)", "Foreign Language (EGE)", "History OR Social Studies (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Лингвистика", exams: ["Иностранный язык (ДВИ, письменно)", "Иностранный язык (ЕГЭ)", "История ИЛИ Обществознание (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 4 места", "Отдельная квота: 4 места"]
+                    },
+                    {
+                        code: "41.03.01",
+                        en: { name: "Area Studies", exams: ["Foreign Language (DVI, written)", "Foreign Language OR Social Studies OR Geography (EGE, choice)", "History (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Зарубежное регионоведение", exams: ["Иностранный язык (ДВИ, письменно)", "Иностранный язык ИЛИ Обществознание ИЛИ География (ЕГЭ, по выбору)", "История (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 1 место", "Отдельная квота: 1 место"]
+                    },
+                    {
+                        code: "41.03.02",
+                        en: { name: "Russian Area Studies", exams: ["Social Studies (DVI, written)", "History (EGE)", "Social Studies OR Geography (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Регионоведение России", exams: ["Обществознание (ДВИ, письменно)", "История (ЕГЭ)", "Обществознание ИЛИ География (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 1 место", "Отдельная квота: 1 место"]
+                    },
+                    {
+                        code: "51.03.01",
+                        en: { name: "Culturology", exams: ["Foreign Language (DVI, written)", "Foreign Language OR History OR Literature (EGE, choice)", "Social Studies (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Культурология", exams: ["Иностранный язык (ДВИ, письменно)", "Иностранный язык ИЛИ История ИЛИ Литература (ЕГЭ, по выбору)", "Обществознание (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 1 место", "Отдельная квота: 1 место"]
+                    }
+                ]
+            },
+            {
+                id: "bioeng",
+                en: { name: "Faculty of Bioengineering and Bioinformatics" },
+                ru: { name: "Факультет биоинженерии и биоинформатики" },
+                programs: [
+                    {
+                        code: "06.05.01",
+                        en: { name: "Bioengineering and Bioinformatics", exams: ["Mathematics (DVI, written)", "Mathematics (EGE)", "Chemistry (EGE)", "Biology (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Биоинженерия и биоинформатика", exams: ["Математика (ДВИ, письменно)", "Математика (ЕГЭ)", "Химия (ЕГЭ)", "Биология (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 4 места", "Отдельная квота: 4 места", "Целевая квота: 1 место"]
+                    }
+                ]
+            },
+            {
+                id: "phys-chem-eng",
+                en: { name: "Faculty of Fundamental Physical and Chemical Engineering" },
+                ru: { name: "Факультет фундаментальной физико-химической инженерии" },
+                programs: [
+                    {
+                        code: "03.03.01",
+                        en: { name: "Applied Mathematics and Physics", exams: ["Mathematics (DVI, written)", "Mathematics (EGE)", "Physics OR Chemistry (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Прикладные математика и физика", exams: ["Математика (ДВИ, письменно)", "Математика (ЕГЭ)", "Физика ИЛИ Химия (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 2 места", "Отдельная квота: 2 места", "Целевая квота: 1 место"]
+                    },
+                    {
+                        code: "04.05.01",
+                        en: { name: "Fundamental Physical and Chemical Engineering", exams: ["Chemistry (DVI, written)", "Chemistry (EGE)", "Mathematics (EGE)", "Physics (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Фундаментальная физико-химическая инженерия", exams: ["Химия (ДВИ, письменно)", "Химия (ЕГЭ)", "Математика (ЕГЭ)", "Физика (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 3 места", "Отдельная квота: 3 места"]
+                    }
+                ]
+            },
+            {
+                id: "biotech",
+                en: { name: "Faculty of Biotechnology" },
+                ru: { name: "Биотехнологический факультет" },
+                programs: [
+                    {
+                        code: "19.03.01",
+                        en: { name: "Biotechnology", exams: ["Biology (DVI, written)", "Mathematics (EGE)", "Biology (EGE)", "Chemistry (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Биотехнология", exams: ["Биология (ДВИ, письменно)", "Математика (ЕГЭ)", "Биология (ЕГЭ)", "Химия (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 3 места", "Отдельная квота: 3 места"]
+                    }
+                ]
+            },
+            {
+                id: "space",
+                en: { name: "Faculty of Space Research" },
+                ru: { name: "Факультет космических исследований" },
+                programs: [
+                    {
+                        code: "01.05.01",
+                        en: { name: "Space Research and Cosmonautics", exams: ["Mathematics (DVI, written)", "Mathematics (EGE)", "Physics OR Informatics (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Космические исследования и космонавтика", exams: ["Математика (ДВИ, письменно)", "Математика (ЕГЭ)", "Физика ИЛИ Информатика (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 6 мест", "Отдельная квота: 6 мест", "Целевая квота: 1 место"]
+                    }
+                ]
+            },
+            {
+                id: "ai",
+                en: { name: "Faculty of Artificial Intelligence" },
+                ru: { name: "Факультет искусственного интеллекта" },
+                programs: [
+                    {
+                        code: "01.03.02",
+                        en: { name: "Applied Mathematics and Informatics (AI Profile)", exams: ["Mathematics (DVI, written)", "Mathematics (EGE)", "Informatics OR Physics (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Прикладная математика и информатика (профиль ИИ)", exams: ["Математика (ДВИ, письменно)", "Математика (ЕГЭ)", "Информатика ИЛИ Физика (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 2 места", "Отдельная квота: 2 места"]
+                    }
+                ]
+            },
+            {
+                id: "gov-admin",
+                en: { name: "Faculty of Public Administration" },
+                ru: { name: "Факультет государственного управления" },
+                programs: [
+                    {
+                        code: "38.03.03",
+                        en: { name: "Human Resource Management", exams: ["Mathematics (DVI, written)", "Mathematics (EGE)", "Foreign Language OR Social Studies (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Управление персоналом", exams: ["Математика (ДВИ, письменно)", "Математика (ЕГЭ)", "Иностранный язык ИЛИ Обществознание (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 1 место", "Отдельная квота: 1 место"]
+                    },
+                    {
+                        code: "38.03.04",
+                        en: { name: "State and Municipal Administration", exams: ["Mathematics (DVI, written)", "Mathematics (EGE)", "Social Studies (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Государственное и муниципальное управление", exams: ["Математика (ДВИ, письменно)", "Математика (ЕГЭ)", "Обществознание (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 4 места", "Отдельная квота: 4 места"]
+                    },
+                    {
+                        code: "41.03.04",
+                        en: { name: "Political Science", exams: ["History (DVI, written)", "History (EGE)", "Social Studies OR Geography OR Foreign Language (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Политология", exams: ["История (ДВИ, письменно)", "История (ЕГЭ)", "Обществознание ИЛИ География ИЛИ Иностранный язык (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 1 место", "Отдельная квота: 1 место"]
+                    }
+                ]
+            },
+            {
+                id: "world-politics",
+                en: { name: "Faculty of World Politics" },
+                ru: { name: "Факультет мировой политики" },
+                programs: [
+                    {
+                        code: "41.03.05",
+                        en: { name: "International Relations", exams: ["History (DVI, written)", "History (EGE)", "Foreign Language OR Geography OR Social Studies (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Международные отношения", exams: ["История (ДВИ, письменно)", "История (ЕГЭ)", "Иностранный язык ИЛИ География ИЛИ Обществознание (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 2 места", "Отдельная квота: 2 места", "Целевая квота: 1 место"]
+                    }
+                ]
+            },
+            {
+                id: "global-processes",
+                en: { name: "Faculty of Global Processes" },
+                ru: { name: "Факультет глобальных процессов" },
+                programs: [
+                    {
+                        code: "41.03.05",
+                        en: { name: "Global Political Processes and Diplomacy", exams: ["History (DVI, written)", "History (EGE)", "Foreign Language OR Social Studies OR Geography (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Глобальные политические процессы и дипломатия", exams: ["История (ДВИ, письменно)", "История (ЕГЭ)", "Иностранный язык ИЛИ Обществознание ИЛИ География (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 1 место", "Отдельная квота: 1 место"]
+                    },
+                    {
+                        code: "41.03.05",
+                        en: { name: "Global Economy and Management / Global Energy and International Business", exams: ["History (DVI, written)", "History (EGE)", "Foreign Language OR Social Studies OR Mathematics OR Geography OR Informatics (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Глобальная экономика и управление / Глобальная энергетика и международный бизнес", exams: ["История (ДВИ, письменно)", "История (ЕГЭ)", "Иностранный язык ИЛИ Обществознание ИЛИ Математика ИЛИ География ИЛИ Информатика (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 2 места", "Отдельная квота: 2 места"]
+                    }
+                ]
+            },
+            {
+                id: "arts",
+                en: { name: "Faculty of Arts" },
+                ru: { name: "Факультет искусств" },
+                programs: [
+                    {
+                        code: "50.03.02",
+                        en: { name: "Fine Arts", exams: ["Creative Written DVI", "Literature (EGE)", "History OR Social Studies OR Foreign Language (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Изящные искусства", exams: ["Творческое письменное ДВИ", "Литература (ЕГЭ)", "История ИЛИ Обществознание ИЛИ Иностранный язык (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: []
+                    }
+                ]
+            },
+            {
+                id: "pol-science",
+                en: { name: "Faculty of Political Science" },
+                ru: { name: "Факультет политологии" },
+                programs: [
+                    {
+                        code: "41.03.04",
+                        en: { name: "Political Science", exams: ["History (DVI, written)", "History (EGE)", "Foreign Language OR Geography OR Social Studies OR Mathematics OR Informatics (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Политология", exams: ["История (ДВИ, письменно)", "История (ЕГЭ)", "Иностранный язык ИЛИ География ИЛИ Обществознание ИЛИ Математика ИЛИ Информатика (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 4 места", "Отдельная квота: 4 места"]
+                    },
+                    {
+                        code: "37.03.02",
+                        en: { name: "Conflictology", exams: ["Social Studies (DVI, written)", "Social Studies (EGE)", "Biology OR Mathematics OR History (EGE, choice)", "Russian Language (EGE)"] },
+                        ru: { name: "Конфликтология", exams: ["Обществознание (ДВИ, письменно)", "Обществознание (ЕГЭ)", "Биология ИЛИ Математика ИЛИ История (ЕГЭ, по выбору)", "Русский язык (ЕГЭ)"] },
+                        quotas: ["Особая квота: 2 места", "Отдельная квота: 2 места"]
+                    }
+                ]
+            },
+            {
+                id: "teacher-edu",
+                en: { name: "Faculty of Teacher Education" },
+                ru: { name: "Факультет педагогического образования" },
+                programs: [
+                    {
+                        code: "44.05.01",
+                        en: { name: "Pedagogical Education", exams: ["Social Studies (EGE)", "History (EGE)", "Literature (EGE)", "Russian Language (EGE)"] },
+                        ru: { name: "Педагогическое образование", exams: ["Обществознание (ЕГЭ)", "История (ЕГЭ)", "Литература (ЕГЭ)", "Русский язык (ЕГЭ)"] },
+                        quotas: []
+                    }
+                ]
+            }
+        ];
+
+        // --- LANGUAGE SWITCHER & RENDER LOGIC ---
+        const langToggle = document.getElementById('lang-toggle');
+        let currentLang = localStorage.getItem('site_lang') || 'en';
+
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function renderFaculty(lang) {
+            const facultyId = getQueryParam('id');
+            const faculty = facultiesData.find(f => f.id === facultyId);
+            const container = document.getElementById('faculty-content');
+            
+            if (!faculty) {
+                container.innerHTML = `<div class="container" style="padding: 4rem 0; text-align: center;"><h2>${lang === 'en' ? 'Faculty not found' : 'Факультет не найден'}</h2><a href="universities.html" style="color: var(--primary-color); margin-top: 1rem; display: inline-block;">${lang === 'en' ? 'Back to Universities' : 'Вернуться к списку вузов'}</a></div>`;
+                return;
+            }
+
+            const title = faculty[lang].name;
+            const programsHtml = faculty.programs.map(prog => `
+                <div class="program-card">
+                    <div class="program-code">${prog.code}</div>
+                    <div class="program-name">${prog[lang].name}</div>
+                    <ul class="exam-list">
+                        ${prog[lang].exams.map((exam, idx) => `
+                            <li class="exam-item">
+                                <span class="exam-priority">${idx + 1}</span>
+                                <div class="exam-details">
+                                    <span class="exam-type">${exam.split('(')[0].trim()}</span>
+                                    <span class="exam-format">(${exam.match(/\(([^)]+)\)/)?.[1] || ''})</span>
+                                </div>
+                            </li>
+                        `).join('')}
+                    </ul>
+                    ${prog.quotas.length > 0 ? `
+                        <div style="margin-top: 1rem;">
+                            ${prog.quotas.map(q => `<span class="quota-badge">${q}</span>`).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+
+            const navLinksHtml = facultiesData
+                .filter(f => f.id !== facultyId)
+                .map(f => `<a href="?id=${f.id}" class="nav-link">${f[lang].name}</a>`)
+                .join('');
+
+            container.innerHTML = `
+                <section class="page-header">
+                    <div class="container faculty-title">
+                        <h1>${title}</h1>
+                        <div class="faculty-meta">
+                            <span><i class="fa-solid fa-book-open"></i> ${faculty.programs.length} ${lang === 'en' ? 'programs' : 'направлений'}</span>
+                            <span><i class="fa-solid fa-calendar-check"></i> ${lang === 'en' ? 'Admission Rules 2026' : 'Правила приема 2026'}</span>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="container programs-section">
+                    <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 2rem;">${lang === 'en' ? 'Admission Programs & Requirements' : 'Направления подготовки и вступительные испытания'}</h2>
+                    ${programsHtml}
+                    
+                    <h2 style="font-size: 2rem; font-weight: 700; margin: 4rem 0 2rem;">${lang === 'en' ? 'Other Faculties' : 'Другие факультеты'}</h2>
+                    <div class="nav-grid">${navLinksHtml}</div>
+                </section>
+            `;
+        }
+
+        function applyLanguage(lang) {
+            document.documentElement.lang = lang;
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                const translations = {
+                    en: { nav_home: "Home", nav_uni: "Universities", btn_login: "Log In", btn_signup: "Sign Up" },
+                    ru: { nav_home: "Главная", nav_uni: "Вузы", btn_login: "Войти", btn_signup: "Регистрация" }
+                };
+                if (translations[lang][key]) el.textContent = translations[lang][key];
+            });
+            localStorage.setItem('site_lang', lang);
+            renderFaculty(lang);
+        }
+
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'ru' : 'en';
+            applyLanguage(currentLang);
+            langToggle.style.transform = 'rotate(360deg)';
+            setTimeout(() => langToggle.style.transform = 'rotate(0deg)', 300);
+        });
+
+        // Initial render
+        applyLanguage(currentLang);
+    </script>
+</body>
+</html>
